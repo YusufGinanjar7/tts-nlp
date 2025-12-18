@@ -1,0 +1,6 @@
+streamlit
+gradio_client
+pydub
+ffmpeg-python
+huggingface_hub
+soundfile
