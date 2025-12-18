@@ -284,6 +284,7 @@ with tab_demo:
                 if (audio) {{
                     audio.playbackRate = speed;
                     audio.play();
+                    document.getElementById("speedValue").innerText = speed + "x";
                 }}
             }}
             </script>
@@ -300,17 +301,7 @@ with tab_demo:
                        step="0.1"
                        value="1"
                        onchange="setSpeed(this.value)">
-                       <span id="speedValue">1.0x</span>
-                <script>
-                function setSpeed(speed) {
-                    const audio = document.getElementById("ttsAudio");
-                    if (audio) {
-                        audio.playbackRate = speed;
-                        audio.play();
-                        document.getElementById("speedValue").innerText = speed + "x";
-                    }
-                }
-                </script>
+                <span id="speedValue">1.0x</span>
             </div>
             """, unsafe_allow_html=True)
 
@@ -466,4 +457,5 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
