@@ -1,4 +1,8 @@
 streamlit
-gradio_client
-huggingface_hub
+numpy
+matplotlib
+librosa
 soundfile
+scipy
+huggingface_hub
+gradio_client
