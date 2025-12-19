@@ -217,7 +217,7 @@ with tab_demo:
 
         text_input = st.text_area(
             "Text Input",
-            placeholder="Hello, our beloved Bahlil!",
+            placeholder="Hello, everyone this is TTS!",
             height=180,
             label_visibility="collapsed"
         )
@@ -459,6 +459,7 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
