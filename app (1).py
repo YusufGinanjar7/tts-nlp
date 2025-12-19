@@ -5,6 +5,9 @@ import io
 import os
 import time
 import base64
+import numpy as np
+import librosa
+import matplotlib.pyplot as plt
 
 # ================= CONFIG =================
 st.set_page_config(
@@ -307,6 +310,86 @@ with tab_demo:
             """,
             height=180
             )
+            # ============== Visualisasi =================
+            st.markdown("#### 📈 Waveform Visualization")
+            
+            # Load audio from bytes
+            y, sr = librosa.load(
+                io.BytesIO(st.session_state["audio_bytes"]),
+                sr=None
+            )
+            
+            fig, ax = plt.subplots(figsize=(10, 3))
+            ax.plot(y)
+            ax.set_title("Waveform (Amplitude vs Time)")
+            ax.set_xlabel("Samples")
+            ax.set_ylabel("Amplitude")
+            
+            st.pyplot(fig)
+
+            st.markdown("#### 🎼 Mel-Spectrogram")
+
+            mel = librosa.feature.melspectrogram(
+                y=y,
+                sr=sr,
+                n_mels=80,
+                fmax=8000
+            )
+            mel_db = librosa.power_to_db(mel, ref=np.max)
+            
+            fig, ax = plt.subplots(figsize=(10, 4))
+            img = ax.imshow(
+                mel_db,
+                aspect="auto",
+                origin="lower",
+                interpolation="nearest"
+            )
+            ax.set_title("Mel-Spectrogram (dB)")
+            ax.set_xlabel("Time")
+            ax.set_ylabel("Mel Frequency")
+            
+            fig.colorbar(img, ax=ax, format="%+2.0f dB")
+            st.pyplot(fig)
+
+            st.markdown("#### 🎚️ Pitch Contour (Fundamental Frequency)")
+
+            f0, voiced_flag, _ = librosa.pyin(
+                y,
+                fmin=librosa.note_to_hz("C2"),
+                fmax=librosa.note_to_hz("C7")
+            )
+            
+            fig, ax = plt.subplots(figsize=(10, 3))
+            ax.plot(f0, label="F0 (Pitch)")
+            ax.set_title("Pitch Contour Over Time")
+            ax.set_xlabel("Frames")
+            ax.set_ylabel("Frequency (Hz)")
+            ax.legend()
+            
+            st.pyplot(fig)
+
+            audio_duration = librosa.get_duration(y=y, sr=sr)
+            rtf = round(st.session_state["latency"] / audio_duration, 3)
+            
+            st.metric(
+                label="⚡ Real-Time Factor (RTF)",
+                value=rtf
+            )
+            
+            st.markdown("#### 📊 Latency vs Input Length")
+            
+            fig, ax = plt.subplots()
+            ax.scatter(
+                [char_count],
+                [st.session_state["latency"]],
+                s=80
+            )
+            ax.set_xlabel("Number of Characters")
+            ax.set_ylabel("Inference Latency (s)")
+            ax.set_title("Latency Scaling")
+            
+            st.pyplot(fig)
+
             # ================= METRICS =================
             st.markdown("#### 📊 Inference Metrics")
 
@@ -459,6 +542,7 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
