@@ -625,7 +625,16 @@ with tab_about:
 
     components.html(
     """
-    <div class="glass-card">
+    <div style="
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(12px);
+        padding: 32px;
+        border-radius: 22px;
+        box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+        margin-bottom: 30px;
+        color: white;
+        font-family: system-ui;
+    ">
         <h3>🧹 Preprocessing Dataset Jenny (Technical)</h3>
     
         <h4>1️⃣ Convert Audio ke Format TTS-Friendly</h4>
@@ -633,6 +642,7 @@ with tab_about:
         Seluruh file audio dikonversi menggunakan <b>FFmpeg</b>
         agar sesuai dengan kebutuhan model TTS.
         </p>
+    
         <ul>
             <li>Sample Rate: 22050 Hz</li>
             <li>Channel: Mono</li>
@@ -642,6 +652,7 @@ with tab_about:
     """,
     height=260
     )
+
     
     st.code(
         "ffmpeg -i input.wav -ar 22050 -ac 1 output.wav",
@@ -712,6 +723,7 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
