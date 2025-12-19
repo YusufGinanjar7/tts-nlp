@@ -626,22 +626,21 @@ with tab_about:
     st.success("📌 Dataset dan preprocessing yang baik sangat berpengaruh terhadap kualitas suara yang dihasilkan oleh model Text-to-Speech.")
 
     st.markdown("""
-        <div class="glass-card">
-            <h3>🧹 Preprocessing Dataset Jenny (Technical)</h3>
-        
-            <h4>1️⃣ Convert Audio ke Format TTS-Friendly</h4>
-            <p>
-            Seluruh file audio dikonversi agar sesuai dengan kebutuhan model TTS
-            menggunakan <b>FFmpeg</b>.
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.code(
-            "ffmpeg -i input.wav -ar 22050 -ac 1 output.wav",
-            language="bash"
-        )
+<div class="glass-card">
+    <h3>🧹 Preprocessing Dataset Jenny (Technical)</h3>
 
+    <h4>1️⃣ Convert Audio ke Format TTS-Friendly</h4>
+    <p>
+    Seluruh file audio dikonversi agar sesuai dengan kebutuhan model TTS
+    menggunakan <b>FFmpeg</b>.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+st.code(
+    "ffmpeg -i input.wav -ar 22050 -ac 1 output.wav",
+    language="bash"
+)
 st.markdown("""
 <ul>
     <li>Sample Rate: 22050 Hz</li>
@@ -711,6 +710,7 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
