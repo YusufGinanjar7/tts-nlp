@@ -148,6 +148,109 @@ with tab_home:
     </div>
     """, unsafe_allow_html=True)
 
+    st.markdown("""
+    <div class="glass-card">
+        <h3>📖 Pendahuluan</h3>
+        <p>
+        Perkembangan <b>Artificial Intelligence (AI)</b>, khususnya pada bidang 
+        <b>Natural Language Processing (NLP)</b> dan <b>Speech Processing</b>,
+        telah memungkinkan komputer untuk tidak hanya memahami teks, 
+        tetapi juga menghasilkan suara manusia yang natural.
+        </p>
+        <p>
+        <b>Text-to-Speech (TTS)</b> merupakan salah satu teknologi penting 
+        yang berperan dalam meningkatkan <b>aksesibilitas</b> dan 
+        <b>interaksi manusia dengan sistem digital</b>.
+        Teknologi ini sangat bermanfaat bagi <b>penyandang tunawicara</b>,
+        <b>disabilitas penglihatan</b>, serta dalam pengembangan
+        asisten virtual dan sistem edukasi berbasis suara.
+        </p>
+        <p>
+        Oleh karena itu, pada proyek ini dikembangkan sebuah <b>aplikasi Text-to-Speech
+        berbasis deep learning</b> menggunakan model <b>VITS</b> yang mampu
+        mengonversi teks menjadi suara manusia secara otomatis, natural,
+        dan end-to-end melalui antarmuka web interaktif.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="glass-card">
+        <h3>❓ Rumusan Masalah</h3>
+        <p>
+        Berdasarkan latar belakang tersebut, rumusan masalah dalam pengembangan
+        sistem Text-to-Speech ini adalah sebagai berikut:
+        </p>
+        <ol>
+            <li>
+                Bagaimana cara mengimplementasikan model <b>Text-to-Speech berbasis
+                deep learning (VITS)</b> yang mampu menghasilkan suara manusia
+                secara natural?
+            </li>
+            <li>
+                Bagaimana mengintegrasikan model TTS ke dalam <b>aplikasi web interaktif</b>
+                sehingga mudah digunakan oleh pengguna?
+            </li>
+            <li>
+                Bagaimana sistem TTS ini dapat dimanfaatkan sebagai <b>alat bantu komunikasi</b>,
+                khususnya bagi <b>penyandang tunawicara</b> dan pengguna dengan kebutuhan khusus?
+            </li>
+        </ol>
+    </div>
+    """, unsafe_allow_html=True)
+    st.markdown("""
+    <div class="glass-card">
+        <h3>🎯 Tujuan Pengembangan</h3>
+        <p>
+        Tujuan dari pengembangan aplikasi Text-to-Speech ini adalah:
+        </p>
+        <ul>
+            <li>
+                Mengembangkan <b>sistem Text-to-Speech berbasis AI</b> 
+                menggunakan model VITS yang mampu menghasilkan suara 
+                dengan kualitas natural.
+            </li>
+            <li>
+                Menyediakan <b>dashboard web interaktif</b> sebagai media
+                demonstrasi dan pemanfaatan teknologi TTS.
+            </li>
+            <li>
+                Membantu proses <b>komunikasi bagi penyandang tunawicara</b>
+                dengan mengubah teks menjadi suara secara real-time.
+            </li>
+            <li>
+                Menjadi sarana pembelajaran dan implementasi nyata
+                dalam bidang <b>NLP dan Speech Processing</b>.
+            </li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="glass-card">
+        <h3>🌱 Manfaat Sistem</h3>
+        <ul>
+            <li>
+                <b>Manfaat Sosial:</b> Membantu penyandang tunawicara
+                mengekspresikan pesan dalam bentuk suara.
+            </li>
+            <li>
+                <b>Manfaat Teknologi:</b> Implementasi nyata model TTS modern
+                berbasis deep learning.
+            </li>
+            <li>
+                <b>Manfaat Akademik:</b> Sebagai media pembelajaran NLP,
+                Speech Processing, dan integrasi AI ke aplikasi web.
+            </li>
+            <li>
+                <b>Manfaat Praktis:</b> Dapat dikembangkan lebih lanjut
+                untuk asisten virtual, edukasi, dan sistem layanan publik.
+            </li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+
     # ---- 3 COLUMN CARDS ----
     col1, col2, col3 = st.columns(3)
 
@@ -542,6 +645,7 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
