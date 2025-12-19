@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 from gradio_client import Client
 import io
 import os
@@ -277,13 +278,13 @@ with tab_demo:
             ).decode()
 
             # ================= AUDIO PLAYER =================
-            st.markdown(f"""
+            components.html(
+            f"""
             <script>
             function setSpeed(speed) {{
                 const audio = document.getElementById("ttsAudio");
                 if (audio) {{
                     audio.playbackRate = speed;
-                    audio.play();
                     document.getElementById("speedValue").innerText = speed + "x";
                 }}
             }}
@@ -300,11 +301,12 @@ with tab_demo:
                        max="2.0"
                        step="0.1"
                        value="1"
-                       onchange="setSpeed(this.value)">
+                       oninput="setSpeed(this.value)">
                 <span id="speedValue">1.0x</span>
             </div>
-            """, unsafe_allow_html=True)
-
+            """,
+            height=180
+            )
             # ================= METRICS =================
             st.markdown("#### 📊 Inference Metrics")
 
@@ -457,5 +459,6 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
 
