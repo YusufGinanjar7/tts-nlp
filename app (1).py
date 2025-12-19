@@ -424,112 +424,114 @@ with tab_demo:
             y = st.session_state["y"]
             sr = st.session_state["sr"]
 
-            # ============== VISUALIZATION LAYOUT =================
-            st.markdown("### 📊 Audio Analysis Visualization")
+            # ================= VISUALIZATION (FULL WIDTH) =================
+            if (
+                "y" in st.session_state
+                and "sr" in st.session_state
+                and "latency" in st.session_state
+            ):
             
-            # ---------- BARIS 1 ----------
-            viz_col_left, viz_col_right = st.columns(2)
+                st.markdown("---")
+                st.markdown("## 📊 Audio Analysis Visualization")
             
-            # ===== LEFT: Mel-Spectrogram =====
-            with viz_col_left:
-                st.markdown("#### 🎼 Mel-Spectrogram")
+                y = st.session_state["y"]
+                sr = st.session_state["sr"]
             
-                mel = librosa.feature.melspectrogram(
-                    y=y,
-                    sr=sr,
-                    n_mels=80,
-                    fmax=8000
+                # ---------- ROW 1 ----------
+                col_v1, col_v2 = st.columns(2)
+            
+                # LEFT — Mel-Spectrogram
+                with col_v1:
+                    st.markdown("### 🎼 Mel-Spectrogram")
+            
+                    mel = librosa.feature.melspectrogram(
+                        y=y, sr=sr, n_mels=80, fmax=8000
+                    )
+                    mel_db = librosa.power_to_db(mel, ref=np.max)
+            
+                    fig, ax = plt.subplots(figsize=(10, 4))
+                    img = ax.imshow(
+                        mel_db, aspect="auto", origin="lower"
+                    )
+                    ax.set_title("Mel-Spectrogram (dB)")
+                    ax.set_xlabel("Time")
+                    ax.set_ylabel("Mel Frequency")
+                    fig.colorbar(img, ax=ax)
+                    st.pyplot(fig)
+            
+                # RIGHT — Waveform
+                with col_v2:
+                    st.markdown("### 📈 Waveform")
+            
+                    fig, ax = plt.subplots(figsize=(10, 4))
+                    ax.plot(y)
+                    ax.set_title("Waveform (Amplitude vs Time)")
+                    ax.set_xlabel("Samples")
+                    ax.set_ylabel("Amplitude")
+                    st.pyplot(fig)
+            
+                # ---------- ROW 2 ----------
+                col_v3, col_v4 = st.columns(2)
+            
+                # LEFT — Pitch
+                with col_v3:
+                    st.markdown("### 🎚️ Pitch Contour")
+            
+                    f0, _, _ = librosa.pyin(
+                        y,
+                        fmin=librosa.note_to_hz("C2"),
+                        fmax=librosa.note_to_hz("C7")
+                    )
+            
+                    fig, ax = plt.subplots(figsize=(10, 3))
+                    ax.plot(f0)
+                    ax.set_title("Fundamental Frequency (F0)")
+                    ax.set_xlabel("Frames")
+                    ax.set_ylabel("Hz")
+                    st.pyplot(fig)
+            
+                # RIGHT — Latency
+                with col_v4:
+                    st.markdown("### 📊 Latency vs Input Length")
+            
+                    fig, ax = plt.subplots(figsize=(10, 3))
+                    ax.scatter(
+                        [char_count],
+                        [st.session_state["latency"]],
+                        s=100
+                    )
+                    ax.set_xlabel("Characters")
+                    ax.set_ylabel("Latency (s)")
+                    ax.set_title("Latency Scaling")
+                    st.pyplot(fig)
+            
+                # ---------- METRICS ----------
+                st.markdown("## ⚙️ Inference Metrics")
+            
+                m1, m2, m3 = st.columns(3)
+            
+                audio_duration = librosa.get_duration(y=y, sr=sr)
+                rtf = round(st.session_state["latency"] / audio_duration, 3)
+            
+                with m1:
+                    st.metric("⏱️ Latency", f"{st.session_state['latency']} s")
+            
+                with m2:
+                    st.metric("⚡ Real-Time Factor", rtf)
+            
+                with m3:
+                    estimated_duration = round(char_count * 0.045, 2)
+                    st.metric("🎵 Estimated Duration", f"{estimated_duration} s")
+            
+                # ---------- DOWNLOAD ----------
+                st.markdown("## ⬇️ Download Audio")
+                st.download_button(
+                    "Download WAV",
+                    st.session_state["audio_bytes"],
+                    "tts_output.wav",
+                    "audio/wav",
+                    use_container_width=True
                 )
-                mel_db = librosa.power_to_db(mel, ref=np.max)
-            
-                fig, ax = plt.subplots(figsize=(6, 4))
-                img = ax.imshow(
-                    mel_db,
-                    aspect="auto",
-                    origin="lower",
-                    interpolation="nearest"
-                )
-                ax.set_title("Mel-Spectrogram (dB)")
-                ax.set_xlabel("Time")
-                ax.set_ylabel("Mel Frequency")
-            
-                fig.colorbar(img, ax=ax, format="%+2.0f dB")
-                st.pyplot(fig)
-            
-            # ===== RIGHT: Waveform =====
-            with viz_col_right:
-                st.markdown("#### 📈 Waveform Visualization")
-            
-                fig, ax = plt.subplots(figsize=(6, 4))
-                ax.plot(y)
-                ax.set_title("Waveform (Amplitude vs Time)")
-                ax.set_xlabel("Samples")
-                ax.set_ylabel("Amplitude")
-                st.pyplot(fig)
-            
-            # ---------- BARIS 2 ----------
-            viz_col_left2, viz_col_right2 = st.columns(2)
-            
-            # ===== LEFT: Pitch Contour =====
-            with viz_col_left2:
-                st.markdown("#### 🎚️ Pitch Contour (Fundamental Frequency)")
-            
-                f0, voiced_flag, _ = librosa.pyin(
-                    y,
-                    fmin=librosa.note_to_hz("C2"),
-                    fmax=librosa.note_to_hz("C7")
-                )
-            
-                fig, ax = plt.subplots(figsize=(6, 3))
-                ax.plot(f0, label="F0 (Pitch)")
-                ax.set_title("Pitch Contour Over Time")
-                ax.set_xlabel("Frames")
-                ax.set_ylabel("Frequency (Hz)")
-                ax.legend()
-                st.pyplot(fig)
-            
-            # ===== RIGHT: Latency vs Input Length =====
-            with viz_col_right2:
-                st.markdown("#### 📊 Latency vs Input Length")
-            
-                fig, ax = plt.subplots(figsize=(6, 3))
-                ax.scatter(
-                    [char_count],
-                    [st.session_state["latency"]],
-                    s=80
-                )
-                ax.set_xlabel("Number of Characters")
-                ax.set_ylabel("Inference Latency (s)")
-                ax.set_title("Latency Scaling")
-                st.pyplot(fig)
-            
-            # ---------- METRICS ----------
-            st.markdown("### ⚙️ Inference Metrics")
-            
-            metric_col1, metric_col2, metric_col3 = st.columns(3)
-            
-            audio_duration = librosa.get_duration(y=y, sr=sr)
-            rtf = round(st.session_state["latency"] / audio_duration, 3)
-            
-            with metric_col1:
-                st.metric("⏱️ Latency", f"{st.session_state['latency']} s")
-            
-            with metric_col2:
-                st.metric("⚡ Real-Time Factor", rtf)
-            
-            with metric_col3:
-                estimated_duration = round(char_count * 0.045, 2)
-                st.metric("🎵 Estimated Duration", f"{estimated_duration} s")
-            
-            # ---------- DOWNLOAD ----------
-            st.markdown("### ⬇️ Download Audio")
-            st.download_button(
-                label="Download WAV",
-                data=st.session_state["audio_bytes"],
-                file_name="tts_output.wav",
-                mime="audio/wav",
-                use_container_width=True
-            )
 
         else:
             st.info("🎧 Audio output akan muncul setelah proses generate.")
@@ -655,6 +657,7 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
