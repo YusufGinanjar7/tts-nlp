@@ -355,15 +355,20 @@ with tab_demo:
                     api_name="/synthesize"
                 )
 
-                if os.path.exists(result):
-                    with open(result, "rb") as f:
-                        audio_bytes = f.read()
-
-                    latency = round(time.time() - start_time, 2)
-
-                    st.session_state["audio_bytes"] = audio_bytes
-                    st.session_state["latency"] = latency
-                    st.session_state["tts_success"] = True
+                with open(result, "rb") as f:
+                    audio_bytes = f.read()
+                
+                latency = round(time.time() - start_time, 2)
+                
+                # ===== LOAD AUDIO KE WAVEFORM =====
+                y, sr = librosa.load(io.BytesIO(audio_bytes), sr=None)
+                
+                # ===== SIMPAN KE SESSION STATE =====
+                st.session_state["audio_bytes"] = audio_bytes
+                st.session_state["latency"] = latency
+                st.session_state["y"] = y
+                st.session_state["sr"] = sr
+                st.session_state["tts_success"] = True
 
             except Exception as e:
                 status.error(f"❌ Error: {e}")
@@ -412,6 +417,13 @@ with tab_demo:
             """,
             height=180
             )
+            if "y" not in st.session_state or "sr" not in st.session_state:
+                st.warning("⚠️ Generate audio terlebih dahulu untuk melihat visualisasi.")
+                st.stop()
+            
+            y = st.session_state["y"]
+            sr = st.session_state["sr"]
+
             # ============== VISUALIZATION LAYOUT =================
             st.markdown("### 📊 Audio Analysis Visualization")
             
@@ -643,6 +655,7 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
