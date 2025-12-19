@@ -423,10 +423,7 @@ with tab_demo:
             
             y = st.session_state["y"]
             sr = st.session_state["sr"]
-        else:
-            st.info("🎧 Audio output akan muncul setelah proses generate.")
-
-    # ================= VISUALIZATION (FULL WIDTH) =================
+            # ================= VISUALIZATION (FULL WIDTH) =================
             if (
                 "y" in st.session_state
                 and "sr" in st.session_state
@@ -534,9 +531,10 @@ with tab_demo:
                     "audio/wav",
                     use_container_width=True
                 )
-            
-    st.markdown('</div>', unsafe_allow_html=True)
-
+                st.markdown('</div>', unsafe_allow_html=True)
+        else:
+            st.info("🎧 Audio output akan muncul setelah proses generate.")
+        
 # ================= ABOUT =================
 with tab_about:
     st.markdown('<div class="section-title">🧠 Technology Behind</div>', unsafe_allow_html=True)
@@ -656,6 +654,7 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
