@@ -623,7 +623,8 @@ with tab_about:
     
     st.success("📌 Dataset dan preprocessing yang baik sangat berpengaruh terhadap kualitas suara model TTS.")
 
-    st.markdown("""
+    components.html(
+    """
     <div class="glass-card">
         <h3>🧹 Preprocessing Dataset Jenny (Technical)</h3>
     
@@ -638,7 +639,9 @@ with tab_about:
             <li>Encoding: PCM 16-bit</li>
         </ul>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+    height=260
+    )
     
     st.code(
         "ffmpeg -i input.wav -ar 22050 -ac 1 output.wav",
@@ -709,6 +712,7 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
