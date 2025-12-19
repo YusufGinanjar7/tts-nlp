@@ -626,59 +626,59 @@ with tab_about:
     st.success("📌 Dataset dan preprocessing yang baik sangat berpengaruh terhadap kualitas suara yang dihasilkan oleh model Text-to-Speech.")
 
     st.markdown("""
-<div class="glass-card">
-    <h3>🧹 Preprocessing Dataset Jenny (Technical)</h3>
-
-    <h4>1️⃣ Convert Audio ke Format TTS-Friendly</h4>
-    <p>
-    Seluruh file audio dikonversi agar sesuai dengan kebutuhan model TTS
-    menggunakan <b>FFmpeg</b>.
-    </p>
-</div>
-""", unsafe_allow_html=True)
-
-st.code(
-    "ffmpeg -i input.wav -ar 22050 -ac 1 output.wav",
-    language="bash"
-)
-st.markdown("""
-<ul>
-    <li>Sample Rate: 22050 Hz</li>
-    <li>Channel: Mono</li>
-    <li>Encoding: PCM 16-bit</li>
-</ul>
-<hr>
-<h4>2️⃣ Convert Metadata dari TSV ke CSV</h4>
-<p>Metadata TSV dikonversi ke CSV.</p>
-""", unsafe_allow_html=True)
-
-st.code(
-    "sed 's/\\t/|/g' metadata.tsv > metadata.csv",
-    language="bash"
-)
-
-st.markdown("""
-<hr>
-<h4>3️⃣ Text Cleaning</h4>
-<p>Pembersihan teks untuk menghilangkan noise linguistik.</p>
-""", unsafe_allow_html=True)
-
-st.code(
-    """sed -E '
-s/\\.wav//;
-s/['"’]//g;
-s/[^a-zA-Z0-9| ]//g;
-y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/
-' metadata.csv > metadata_clean.csv""",
-    language="bash"
-)
-
-st.markdown("<p>Perbaikan format nama file:</p>", unsafe_allow_html=True)
-
-st.code(
-    "sed -E 's/^jenny([0-9]{5})/jenny_\\1/' metadata.csv > metadata_fixed.csv",
-    language="bash"
-)
+    <div class="glass-card">
+        <h3>🧹 Preprocessing Dataset Jenny (Technical)</h3>
+    
+        <h4>1️⃣ Convert Audio ke Format TTS-Friendly</h4>
+        <p>
+        Seluruh file audio dikonversi agar sesuai dengan kebutuhan model TTS
+        menggunakan <b>FFmpeg</b>.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.code(
+        "ffmpeg -i input.wav -ar 22050 -ac 1 output.wav",
+        language="bash"
+    )
+    st.markdown("""
+    <ul>
+        <li>Sample Rate: 22050 Hz</li>
+        <li>Channel: Mono</li>
+        <li>Encoding: PCM 16-bit</li>
+    </ul>
+    <hr>
+    <h4>2️⃣ Convert Metadata dari TSV ke CSV</h4>
+    <p>Metadata TSV dikonversi ke CSV.</p>
+    """, unsafe_allow_html=True)
+    
+    st.code(
+        "sed 's/\\t/|/g' metadata.tsv > metadata.csv",
+        language="bash"
+    )
+    
+    st.markdown("""
+    <hr>
+    <h4>3️⃣ Text Cleaning</h4>
+    <p>Pembersihan teks untuk menghilangkan noise linguistik.</p>
+    """, unsafe_allow_html=True)
+    
+    st.code(
+        """sed -E '
+    s/\\.wav//;
+    s/['"’]//g;
+    s/[^a-zA-Z0-9| ]//g;
+    y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/
+    ' metadata.csv > metadata_clean.csv""",
+        language="bash"
+    )
+    
+    st.markdown("<p>Perbaikan format nama file:</p>", unsafe_allow_html=True)
+    
+    st.code(
+        "sed -E 's/^jenny([0-9]{5})/jenny_\\1/' metadata.csv > metadata_fixed.csv",
+        language="bash"
+    )
 
 
 # ================= PROFILE =================
@@ -710,6 +710,7 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
