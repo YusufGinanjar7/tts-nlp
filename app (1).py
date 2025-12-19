@@ -216,19 +216,19 @@ with tab_home:
         <h3>🌱 Manfaat Sistem</h3>
         <ul>
             <li>
-                <b>Manfaat Sosial:</b> Membantu penyandang tunawicara
+                Membantu penyandang tunawicara
                 mengekspresikan pesan dalam bentuk suara.
             </li>
             <li>
-                <b>Manfaat Teknologi:</b> Implementasi nyata model TTS modern
+                Implementasi nyata model TTS modern
                 berbasis deep learning.
             </li>
             <li>
-                <b>Manfaat Akademik:</b> Sebagai media pembelajaran NLP,
+                Sebagai media pembelajaran NLP,
                 Speech Processing, dan integrasi AI ke aplikasi web.
             </li>
             <li>
-                <b>Manfaat Praktis:</b> Dapat dikembangkan lebih lanjut
+                Dapat dikembangkan lebih lanjut
                 untuk asisten virtual, edukasi, dan sistem layanan publik.
             </li>
         </ul>
@@ -644,6 +644,7 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
