@@ -693,6 +693,24 @@ with tab_about:
         language="bash"
     )
 
+    st.markdown("""
+    <div class="glass-card">
+        <h3>📂 Project Notebook</h3>
+        <p>
+        Seluruh proses eksperimen, preprocessing, dan pengembangan model
+        dapat diakses melalui notebook Kaggle berikut:
+        </p>
+        <p>
+            🔗 <a href="https://www.kaggle.com/code/refamuhammad/tts-project"
+                  target="_blank"
+                  style="color:#93c5fd; font-weight:600;">
+                Kaggle — TTS Project Notebook
+            </a>
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+
 
 # ================= PROFILE =================
 with tab_profile:
@@ -723,6 +741,7 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
