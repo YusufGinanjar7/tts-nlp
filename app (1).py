@@ -135,21 +135,6 @@ with tab_home:
     # ---- INTRO CARD ----
     st.markdown("""
     <div class="glass-card">
-        <h3>🔊 What is Text-to-Speech?</h3>
-        <p>
-        Dashboard ini merupakan <b>aplikasi Text-to-Speech (TTS)</b> berbasis 
-        <b>deep learning</b> yang mampu mengonversi teks tertulis menjadi suara manusia
-        secara <b>otomatis, natural, dan end-to-end</b>.
-        </p>
-        <p>
-        Sistem ini dikembangkan sebagai <b>demo interaktif</b> untuk menunjukkan
-        bagaimana model TTS modern dapat diintegrasikan ke dalam aplikasi web.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div class="glass-card">
         <h3>📖 Pendahuluan</h3>
         <p>
         Perkembangan <b>Artificial Intelligence (AI)</b>, khususnya pada bidang 
@@ -250,6 +235,20 @@ with tab_home:
     </div>
     """, unsafe_allow_html=True)
 
+    st.markdown("""
+    <div class="glass-card">
+        <h3>🔊 What is Text-to-Speech?</h3>
+        <p>
+        Dashboard ini merupakan <b>aplikasi Text-to-Speech (TTS)</b> berbasis 
+        <b>deep learning</b> yang mampu mengonversi teks tertulis menjadi suara manusia
+        secara <b>otomatis, natural, dan end-to-end</b>.
+        </p>
+        <p>
+        Sistem ini dikembangkan sebagai <b>demo interaktif</b> untuk menunjukkan
+        bagaimana model TTS modern dapat diintegrasikan ke dalam aplikasi web.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
     # ---- 3 COLUMN CARDS ----
     col1, col2, col3 = st.columns(3)
@@ -645,6 +644,7 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
