@@ -607,23 +607,21 @@ with tab_about:
             <li>
                 <b>Standarisasi Audio</b><br>
                 Audio dikonversi ke format TTS-friendly
-                (22050 Hz, mono, PCM 16-bit) untuk menjaga konsistensi kualitas suara.
+                (22050 Hz, mono, PCM 16-bit).
             </li><br>
             <li>
                 <b>Metadata Conversion</b><br>
-                Metadata diubah dari format TSV ke CSV agar lebih mudah diproses
-                oleh sistem training TTS.
+                Metadata diubah dari TSV ke CSV.
             </li><br>
             <li>
                 <b>Text Cleaning</b><br>
-                Teks dibersihkan dengan menghapus karakter khusus, tanda kutip,
-                dan mengubah seluruh teks menjadi lowercase untuk mengurangi noise.
+                Normalisasi teks untuk mengurangi noise linguistik.
             </li>
         </ol>
     </div>
     """, unsafe_allow_html=True)
-
-    st.success("📌 Dataset dan preprocessing yang baik sangat berpengaruh terhadap kualitas suara yang dihasilkan oleh model Text-to-Speech.")
+    
+    st.success("📌 Dataset dan preprocessing yang baik sangat berpengaruh terhadap kualitas suara model TTS.")
 
     st.markdown("""
     <div class="glass-card">
@@ -631,9 +629,14 @@ with tab_about:
     
         <h4>1️⃣ Convert Audio ke Format TTS-Friendly</h4>
         <p>
-        Seluruh file audio dikonversi agar sesuai dengan kebutuhan model TTS
-        menggunakan <b>FFmpeg</b>.
+        Seluruh file audio dikonversi menggunakan <b>FFmpeg</b>
+        agar sesuai dengan kebutuhan model TTS.
         </p>
+        <ul>
+            <li>Sample Rate: 22050 Hz</li>
+            <li>Channel: Mono</li>
+            <li>Encoding: PCM 16-bit</li>
+        </ul>
     </div>
     """, unsafe_allow_html=True)
     
@@ -642,20 +645,16 @@ with tab_about:
         language="bash"
     )
     st.markdown("""
-    <ul>
-        <li>Sample Rate: 22050 Hz</li>
-        <li>Channel: Mono</li>
-        <li>Encoding: PCM 16-bit</li>
-    </ul>
     <hr>
     <h4>2️⃣ Convert Metadata dari TSV ke CSV</h4>
-    <p>Metadata TSV dikonversi ke CSV.</p>
+    <p>Metadata dikonversi agar mudah diproses saat training.</p>
     """, unsafe_allow_html=True)
     
     st.code(
         "sed 's/\\t/|/g' metadata.tsv > metadata.csv",
         language="bash"
     )
+
     
     st.markdown("""
     <hr>
@@ -710,6 +709,7 @@ st.markdown("""
     NLP Project • Text to Speech • Streamlit × Hugging Face
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
